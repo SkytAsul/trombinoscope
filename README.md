@@ -1,4 +1,8 @@
 # Trombinoscope / Face Book
+This is a Typst/Python/Bash project that makes creation of a face book fast and easy.
+
+It was originally created for the French engineering school INSA Rennes, but can easily be adapted to every school in the world.
+
 ## Instructions
 1. Place in the `/raw` directory all the raw image files, following the `Department/Year/Group` hierarchy. They must be in the format `.JPG`.
 1. Also place the `.xlsx` files in the same hierarchy.
@@ -11,7 +15,8 @@
     1. Resize the pictures to a much lower size (270 in width and keeping the same ratio, customizable)
     1. Save the edited picture in `/data` in the `.JPG` format
     1. Remove all previously existing `.csv` files in `/data`
-    1. Convert all `.xlsx` files (Google Sheets export / Excel files) from `/raw` to `.csv` ones in `/data`
+    1. Convert all `.xlsx` files (Google Sheets export / Excel files) from `/raw` to `.csv` ones in `/data`  
+    - yes, this step will take a long time and will burn your computer
 1. Put the `GroupsData.csv` file in `/data`.
 1. Do `typst compile trombi.typ`.
 1. Ta-dam!
