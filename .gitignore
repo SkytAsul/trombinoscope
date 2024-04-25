@@ -1,0 +1,6 @@
+*.JPG
+*.ARW
+*.pdf
+/raw/**/*.xlsx
+/data/**/*.csv
+!/data/GroupsData_Sample.csv

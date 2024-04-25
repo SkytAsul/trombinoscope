@@ -1,0 +1,3 @@
+[submodule "trombinoclean"]
+	path = trombinoclean
+	url = https://github.com/3akev/trombinoclean.git
