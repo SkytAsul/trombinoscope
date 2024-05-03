@@ -1,9 +1,3 @@
-#set page("a5", margin: (top: 1cm, left: 0.5cm, right: 0.5cm, bottom: 0.5cm))
-
-// We do not want to *display* the headings: we only want them so they can be shown in the
-// PDF index (and eventually in the #outline function if needed).
-#show heading: it => {}
-
 // This function allows to display a text with a variable size so it fits the available space the best.
 // It works by trying to display it multiple times, and decreasing the font size each time until it fits.
 // It is probably not the best way and can crash the compiler if there are too many iterations.
@@ -47,12 +41,12 @@
     full-group-name += " - " + group-name
   }
 
-  set page(header: [
+  let header = [
     #h(1fr)
     *#promo\A - #full-group-name*
     #h(0.3cm)
-  ])
-
+  ]
+  set page(header: header)
   heading(level: 2, full-group-name)
 
   let group-data-path = group-row.at("DataPath")
@@ -75,16 +69,28 @@
   }
 }
 
-// ----------- ENTRYPOINT -----------
-#let groups-data = csv("GroupsData.csv", row-type: dictionary)
-#let promos = groups-data.map(x => x.at("Promo")).dedup()
-#for promo in promos {
-  heading(level: 1, "Année " + str(promo))
-  align(center+horizon, box(stroke: 2pt, inset: 15pt, text(size: 60pt, weight: "extrabold", str(promo) + "A")))
-  let departs = groups-data.filter(x => x.at("Promo") == promo).map(x => x.at("Depart")).dedup()
-  for depart in departs{
-    for group-row in groups-data.filter(x => x.at("Promo") == promo and x.at("Depart") == depart){
-      display-group(promo, depart, group-row)
+#let add-images(promo-function) = [
+  // We do not want to *display* the headings: we only want them so they can be shown in the
+  // PDF index (and eventually in the #outline function if needed).
+  #show heading: it => {}
+
+  #let groups-data = csv("GroupsData.csv", row-type: dictionary)
+  #let promos = groups-data.map(x => x.at("Promo")).dedup()
+  #for promo in promos {
+    //heading(level: 1, "Année " + str(promo))
+    // first page headers are not shown if we keep that, see problem-demo.typ
+    promo-function(promo)
+    let departs = groups-data.filter(x => x.at("Promo") == promo).map(x => x.at("Depart")).dedup()
+    for depart in departs{
+      for group-row in groups-data.filter(x => x.at("Promo") == promo and x.at("Depart") == depart){
+        display-group(promo, depart, group-row)
+      }
     }
   }
-}
+]
+
+// Example :
+/*
+#set page("a5", margin: (top: 1cm, left: 0.5cm, right: 0.5cm, bottom: 0.5cm))
+#add-images(promo => align(center+horizon, box(stroke: 2pt, inset: 15pt, text(size: 60pt, weight: "extrabold", str(promo) + "A"))))
+*/

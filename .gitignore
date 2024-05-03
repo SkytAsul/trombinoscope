@@ -4,3 +4,5 @@
 /raw/**/*.xlsx
 /data/**/*.csv
 !/data/GroupsData_Sample.csv
+/pages/associations/*
+/pages/*.svg
