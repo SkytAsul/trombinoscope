@@ -58,11 +58,7 @@
   }
 
   let students = group-data.filter(line => line.at(5) != "DSC0" and line.at(5) != "DSC00" and line.at(5) != "") // there must be a better way to do that
-  for student in students {
-    student.at(0) = upper(student.at(0))
-    // We upper the name now because we need the sort to apply on uppercased names.
-  }
-  students = students.sorted(key: line => line.at(0))
+  students = students.sorted(key: line => upper(line.at(0)))
   for students-chunk in students.chunks(9, exact: false){
     let students-boxes = students-chunk.map(line => display-student(group-data-path, line))
     grid(columns: (1fr, 1fr, 1fr), rows: (1fr, 1fr, 1fr), gutter: 0.1cm, ..students-boxes)
