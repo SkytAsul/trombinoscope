@@ -12,6 +12,19 @@
   })
 }
 
+// author: laurmaedje
+// Renders an image or a placeholder if it doesn't exist.
+// Don’t try this at home, kids!
+#let maybe-image(path, ..args) = context {
+  let path-label = label(path)
+   let first-time = query((context {}).func()).len() == 0
+   if first-time or query(path-label).len() > 0 {
+    [#image(path, ..args)#path-label]
+  } else {
+    image("no_picture.jpg", ..args)
+  }
+}
+
 #let display-student(group-data-path, line) = {
   // As the CSVs do not always have the same amount of columns, we cannot directly destructure
   // the line to a tuple (name, surname, birthdate...).
@@ -20,10 +33,23 @@
   let birthdate = line.at(2)
   let quote = line.at(3)
   let picture = group-data-path + line.at(5) + ".JPG"
+
+  if surname == "Youenn" and name == "LE JEUNE " {
+    quote = [
+      Vous connaissez Typst ? C'est vraiment mieux que LaTeX vous savez#footnote[
+        Votre serviteur y croit tellement que ce trombinoscope, que vous tenez entre les mains, est entièrement fait à l'aide de Typst !
+      ]
+    ]
+  }
+
+  if quote == "Slay" {
+    quote = box(text(fill: gradient.linear(..color.map.rainbow), quote, weight: "bold"))
+  }
+
   align(center, grid(
     rows: (auto, 10pt, 9pt, 1fr),
     gutter: 4pt,
-    image(picture, width: 95pt),
+    maybe-image(picture, width: 95pt, height: 303pt/270pt * 95pt),
     {
       set text(weight: "bold")
       block(width: 95%, fit-text(name.trim(" ") + " " + surname.trim(" "), 11pt))

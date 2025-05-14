@@ -1,12 +1,12 @@
 #import "data/trombi.typ" : add-images
 
-#set page("a5", margin: (top: 1cm, left: 0.5cm, right: 0.5cm, bottom: 0.5cm), footer: context [
+#set page("a5", margin: (top: 1cm, left: 0.5cm, right: 0.5cm, bottom: 1cm), footer: context [
   #if calc.even(counter(page).get().at(0)) {
     align(left, counter(page).display())
   } else {
     align(right, counter(page).display())
   }
-], footer-descent: -10%)
+], footer-descent: 30%)
 
 #page(background: image("pages/Couverture.svg"), footer: none)[]
 

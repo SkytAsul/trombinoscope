@@ -3,6 +3,7 @@
 *.pdf
 /raw/**/*.xlsx
 /data/**/*.csv
+/data/**/*.csv_original
 !/data/GroupsData_Sample.csv
 /pages/associations/*
 /pages/*.svg

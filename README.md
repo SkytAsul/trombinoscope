@@ -27,3 +27,8 @@ It was originally created for the French engineering school INSA Rennes, but can
 - Images should have the `.JPG` format (case-sensitive).
 - They are automatically cropped around detected face with customizable percentages. They are also resized to a smaller size (in 2024, 270x303).
 - Those peculiarities can be changed in the `replacehsv.py` Python script.
+
+## Fixing problems
+In the Google Sheets, photographers often add or skip extra zeroes at the beginning of picture names.
+To fix this automatically, you can use the `data/fix-images.py` script. It will also tell you which
+images are missing.
