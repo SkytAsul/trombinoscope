@@ -23,7 +23,7 @@ def parse_date(date_str):
     return date(year, month, day)
 
 def read_csv(file):
-    #print(f"Reading {file}")
+    print(f"Reading {file}")
     with open(file, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         next(reader, None)

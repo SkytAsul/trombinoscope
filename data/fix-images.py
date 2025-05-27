@@ -7,7 +7,10 @@ import csv
 import os
 import shutil
 
+count = 0
+
 def read_csv(dir: str, file: str):
+    global count
     updated_rows = []
     updated = False
     with open(file, newline='') as csvfile:
@@ -19,9 +22,11 @@ def read_csv(dir: str, file: str):
             pic_name = row[5]
             if pic_name == "" or pic_name == "DSC0" or pic_name == "DSC00":
                 continue
+            count += 1
 
             if os.path.exists(os.path.join(dir, pic_name + ".JPG")):
                 continue
+
             
             pic_name_2 = pic_name[:3] + "0" + pic_name[3:] # adding leading zero
             if os.path.exists(os.path.join(dir, pic_name_2 + ".JPG")):
@@ -54,3 +59,5 @@ for dirpath, dirnames, filenames in os.walk("./"):
         if ext.lower() == ".csv":
             fileNamePath = os.path.join(dirpath, filename)
             read_csv(dirpath, fileNamePath)
+
+print(count)

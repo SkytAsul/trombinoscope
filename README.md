@@ -6,7 +6,10 @@ It was originally created for the French engineering school INSA Rennes, but can
 ## Instructions
 1. Place in the `/raw` directory all the raw image files, following the `Department/Year/Group` hierarchy. They must be in the format `.JPG`.
 1. Also place the `.xlsx` files in the same hierarchy.
-1. Put the wanted background image in the `trombinoclean` directory, under the name `bg_big.jpg`.
+> [!TIP]
+> You can use the [rclone](https://rclone.org) util to automatically sync the contents of the Google Drive folder with your computer. It is a little challenging to setup but in the end it's worth it.  
+> The command would look like this: `rclone sync -P --drive-shared-with-me ClubTrombi:"Club Trombinoscope/2025" ./`
+3. Put the wanted background image in the `trombinoclean` directory, under the name `bg_big.jpg`.
 1. Launch the `/convert-raw.sh` script. This will :
     1. Read pictures in `/raw` *that have not already been converted*
     1. Convert the green screen to the background image

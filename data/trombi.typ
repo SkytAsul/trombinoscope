@@ -12,6 +12,8 @@
   })
 }
 
+#let _accept-missing-photos = false
+
 // author: laurmaedje
 // Renders an image or a placeholder if it doesn't exist.
 // Don’t try this at home, kids!
@@ -46,10 +48,11 @@
     quote = box(text(fill: gradient.linear(..color.map.rainbow), quote, weight: "bold"))
   }
 
+  let image-func = if _accept-missing-photos { maybe-image } else { image }
   align(center, grid(
     rows: (auto, 10pt, 9pt, 1fr),
     gutter: 4pt,
-    maybe-image(picture, width: 95pt, height: 303pt/270pt * 95pt),
+    image-func(picture, width: 95pt, height: 303pt/270pt * 95pt),
     {
       set text(weight: "bold")
       block(width: 95%, fit-text(name.trim(" ") + " " + surname.trim(" "), 11pt))

@@ -1,5 +1,11 @@
 #show: it => align(horizon, it)
 
+#let insa-colors = (
+  primary: rgb("#e42618"),
+  secondary: rgb("#f69f1d"),
+  tertiary: rgb("#f5adaa"),
+)
+
 #align(center)[
   = Effectif des élèves-ingénieur·es\ (au début de l'année scolaire 2023/2024)
 ]
@@ -11,6 +17,8 @@
 #set table(
   fill: (rgb("EAF2F5"), none)
 )
+
+*Valeurs pas à jour !*
 
 == 1#super[er] cycle
 #table(
@@ -40,39 +48,76 @@
 #v(2em)
 #set text(size: 1.1em)
 
-Nombre d'élèves-ingénieur·es Sportifs de Haut Niveau : *112*
+Nombre d'élèves-ingénieur·es Sportifs de Haut Niveau : *X*
 
-Nombre d'élèves-ingénieur·es internationaux : *285*
+Nombre d'élèves-ingénieur·es internationaux : *X*
 
-Nombre d'élèves-ingénieures : *591*
+Nombre d'élèves-ingénieures : *X*
 
 #v(1em)
 
-*Nombre total d'élèves-ingénieur·es : 1785*
+*Nombre total d'élèves-ingénieur·es : X*
 
 #pagebreak()
 
 #columns(2)[
   *À l'INSA, il y a :*
 
-  - 15 Thomas
+  - 19 Thomas
+  - 15 Nathan et Clément
   - 13 Camille
-  - 12 Clément
-  - 11 Théo et Alexandre
-  - 10 Antoine, Malo et Arthur
-  - 9 Titouan, Léo, Pierre, Romain et Emma
-  - 8 Valentin, Lucas, Paul, Maxime
-  - 7 Eva, Pauline, Louis et Jules
+  - 12 Arthur, Romain et Jules
+  - 11 Lucas et Maxime
+  - 10 Tom et Théo
+  - 9 Titouan et Malo
+  - 8 Tristan, Gabriel, Quentin, Alexandre, Baptiste et Léo
   #colbreak()
   *Parmi les dates recueillies :*
 
-  - 8 personnes sont nées le 13 avril, le 23 janvier et le 15 mars.
-  - 7 personnes sont nées le 4 août et le 19 février.
-  - 2 personnes sont nées le 29 février
-  - seules 71 personnes ont une date de naissance unique
-  - 267 personnes sont nées le même jour que quelqu'un d'autre
+  - 10 personnes sont nées un 17 janvier.
+  - 8 personnes sont nées un 13 avril, un 19 mars et un 23 janvier.
+  - 2 personnes sont nées un 29 février
+  - seules 63 personnes ont une date d'anniversaire unique
+  - 341 personnes sont nées le même jour et la même année que quelqu'un d'autre
+  - 9 personnes ont trouvé malin de dire être nées le 30 février et ont fait crash le programme de calcul de statistiques. Sachez que je connais vos noms et vos visages.
 ]
 
 #v(3em)
 
-#figure(image("stats/birth months.svg", width: 90%), caption: "Répartition des mois de naissance", supplement: none)
+#import "@preview/lilaq:0.3.0" as lq
+#let months-counts = (0,) * 12
+
+#{
+  let date-regex = regex("(\d+)-(\d+)-(\d+)")
+  let data = csv("stats/data.csv", row-type: dictionary)
+  let dates = data.map(row => row.at("Date de naissance")).filter(date => date != "").map(date => {
+    let matcher = date.match(date-regex)
+    let (year, month, day) = matcher.captures
+    return datetime(day: int(day), month: int(month), year: int(year))
+  })
+
+  for date in dates {
+    months-counts.at(date.month() - 1) += 1
+  }
+}
+
+#show: lq.set-grid(kind: "y")
+#show: lq.set-tick(stroke: 0pt)
+#figure(lq.diagram(
+  width: 12cm,
+  height: 6cm,
+  xaxis: (
+    ticks: range(1, 12 + 1).map(i => datetime(month: i, year: 0, day: 1).display("[month repr:long]"))
+      .map(rotate.with(-45deg, reflow: true))
+      .map(align.with(left))
+      .enumerate(),
+  ),
+  yaxis: (
+    ticks: (0, 25, 50, 75, 100)
+  ),
+  lq.bar(
+    range(12),
+    months-counts,
+    fill: insa-colors.primary
+  )
+), caption: "Répartition des mois de naissance", supplement: none)

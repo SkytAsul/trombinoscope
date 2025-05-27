@@ -8,6 +8,8 @@
   }
 ], footer-descent: 30%)
 
+#set text(lang: "fr")
+
 #page(background: image("pages/Couverture.svg"), footer: none)[]
 
 #page(footer: none)[]
