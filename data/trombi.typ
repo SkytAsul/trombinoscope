@@ -13,6 +13,7 @@
 }
 
 #let _accept-missing-photos = false
+#let pictures-counter = counter("total-pictures")
 
 // author: laurmaedje
 // Renders an image or a placeholder if it doesn't exist.
@@ -48,6 +49,7 @@
     quote = box(text(fill: gradient.linear(..color.map.rainbow), quote, weight: "bold"))
   }
 
+  pictures-counter.step()
   let image-func = if _accept-missing-photos { maybe-image } else { image }
   align(center, grid(
     rows: (auto, 10pt, 9pt, 1fr),

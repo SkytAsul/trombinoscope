@@ -7,7 +7,7 @@
 )
 
 #align(center)[
-  = Effectif des élèves-ingénieur·es\ (au début de l'année scolaire 2023/2024)
+  = Effectif des élèves-ingénieur·es\ (au début de l'année scolaire 2024/2025)
 ]
 
 #v(2em)
@@ -17,46 +17,53 @@
 #set table(
   fill: (rgb("EAF2F5"), none)
 )
-
-*Valeurs pas à jour !*
+#show table.cell.where(y: 0): set text(weight: "bold", size: 0.8em)
 
 == 1#super[er] cycle
-#table(
-  columns: 2,
+#{
+show table.cell.where(x: 4): set text(weight: "bold")
+show table.cell.where(y: 3): set text(weight: "bold")
+table(
+  columns: 5,
   inset: (x: 1em),
-  [1#super[ère] année], [300],
-  [2#super[ème] année], [292],
-  [*Total*], [592],
+  [/], [Classique], [FIRE], [FISP], [Total],
+  [1#super[ère] année], [217], [44], [41], [302],
+  [2#super[ème] année], [209], [38], [33], [280],
+  [*Total*], str(217+209), str(44+38), str(41+33), str(302+280),
 )
+}
 
 #v(2em)
 
-#show table.cell.where(y: 0): set text(weight: "bold", size: 0.8em)
-#show table.cell.where(y: 4): set text(weight: "bold")
-#show table.cell.where(x: 9): set text(weight: "bold")
 == 2#super[ème] cycle
-#table(
+#{
+show table.cell.where(y: 4): set text(weight: "bold")
+show table.cell.where(x: 9): set text(weight: "bold")
+table(
   columns: (auto,) + (1fr,) * 9,
   inset: (x: 0.5em),
   [/], [EII], [E-SET], [E&T], [GCU], [GMA], [GPM], [INFO], [MA], [Total],
-  [3ème Année], [38], [18], [23], [68], [68], [51], [71], [22], [359],
-  [4ème Année], [46], [19], [35], [63], [68], [51], [72], [23], [377],
-  [5ème Année], [46], [24], [43], [96], [87], [56], [71], [34], [457],
-  [Total], [130], [61], [101], [227], [223], [158], [214], [79], [1193]
+  [3ème Année], [59], [17], [48], [112], [83], [56], [77], [25], str(59+17+48+112+83+56+77+25),
+  [4ème Année], [43], [15], [25], [61], [70], [50], [63], [22], str(43+15+25+61+70+50+63+22),
+  [5ème Année], [36], [27], [61], [72], [75], [60], [87], [26], str(36+27+61+72+75+60+87+26),
+  [Total], str(59+43+36), str(17+15+27), str(48+25+61), str(112+61+72), str(83+70+75), str(56+50+60), str(77+63+87), str(25+22+26), str(477+349+444)
 )
+}
 
 #v(2em)
 #set text(size: 1.1em)
 
-Nombre d'élèves-ingénieur·es Sportifs de Haut Niveau : *X*
+Nombre de Sportifs de Haut Niveau : *107*
 
-Nombre d'élèves-ingénieur·es internationaux : *X*
+Nombre d'Artistes de Haut Niveau : *18*
 
-Nombre d'élèves-ingénieures : *X*
+Nombre d'internationaux : *??*
+
+Proportion d'élèves ingénieures : *33,91%*
 
 #v(1em)
 
-*Nombre total d'élèves-ingénieur·es : X*
+*Nombre total d'élèves-ingénieur·es : #str(582+1270)*
 
 #pagebreak()
 
@@ -101,13 +108,16 @@ Nombre d'élèves-ingénieures : *X*
   }
 }
 
+#let months = ("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre")
+
 #show: lq.set-grid(kind: "y")
 #show: lq.set-tick(stroke: 0pt)
 #figure(lq.diagram(
   width: 12cm,
   height: 6cm,
   xaxis: (
-    ticks: range(1, 12 + 1).map(i => datetime(month: i, year: 0, day: 1).display("[month repr:long]"))
+    ticks: range(0, 12)
+      .map(i => text(size: .9em, months.at(i)))
       .map(rotate.with(-45deg, reflow: true))
       .map(align.with(left))
       .enumerate(),
@@ -120,4 +130,4 @@ Nombre d'élèves-ingénieures : *X*
     months-counts,
     fill: insa-colors.primary
   )
-), caption: "Répartition des mois de naissance", supplement: none)
+), caption: [*Répartition des mois de naissance*], supplement: none)
