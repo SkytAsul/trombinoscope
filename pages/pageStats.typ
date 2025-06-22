@@ -57,8 +57,6 @@ Nombre de Sportifs de Haut Niveau : *107*
 
 Nombre d'Artistes de Haut Niveau : *18*
 
-Nombre d'internationaux : *??*
-
 Proportion d'élèves ingénieures : *33,91%*
 
 #v(1em)
@@ -86,7 +84,7 @@ Proportion d'élèves ingénieures : *33,91%*
   - 2 personnes sont nées un 29 février
   - seules 63 personnes ont une date d'anniversaire unique
   - 341 personnes sont nées le même jour et la même année que quelqu'un d'autre
-  - 9 personnes ont trouvé malin de dire être nées le 30 février et ont fait crash le programme de calcul de statistiques. Sachez que je connais vos noms et vos visages.
+  - 9 personnes ont trouvé malin de dire être nées le 30 février et ont fait crash le programme de calcul de statistiques. On vous voit.
 ]
 
 #v(3em)

@@ -33,4 +33,6 @@
 #page(footer: none)[]
 #page(footer: none)[]
 
-#page(background: image("pages/4e-Couverture.svg"), footer: none)[]
+#page(background: image("pages/4e-Couverture.svg"), footer: none)[
+  #place(horizon+center, dy: 60pt, dx: -10pt, image("pages/logo.png", width: 70%))
+]

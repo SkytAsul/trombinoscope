@@ -7,3 +7,6 @@
 !/data/GroupsData_Sample.csv
 /pages/associations/*
 /pages/*.svg
+/pages/logo.png
+/pages/stats/data.csv
+data-backup
